@@ -91,6 +91,20 @@ export function InputList<T = DefaultType>({
   'aria-label': ariaLabel,
 }: Props<T>) {
   const isAddButtonVisible = !(isAddButtonHidden || readOnly);
+  const {
+    handleMoveUp,
+    handleMoveDown,
+    handleRemoveItem,
+    handleAdd,
+    handleChangeItem,
+  } = useInputList<T>({
+    value,
+    onChange,
+    itemBuilder,
+    itemKeyGetter,
+    movable,
+  });
+
   return (
     <div className="form-group" aria-label={ariaLabel || label}>
       {label && (
@@ -187,7 +201,21 @@ export function InputList<T = DefaultType>({
       )}
     </div>
   );
+}
 
+export function useInputList<T = DefaultType>({
+  value,
+  onChange,
+  itemBuilder = defaultItemBuilder as unknown as () => T,
+  itemKeyGetter = (item: T, index: number) => index,
+  movable = false,
+}: {
+  value: T[];
+  onChange(value: T[], e: OnChangeEvent<T>): void;
+  itemBuilder?(): T;
+  itemKeyGetter?(item: T, index: number): Key;
+  movable?: boolean;
+}) {
   function handleMoveUp(index: number) {
     if (index <= 0) {
       return;
@@ -242,6 +270,14 @@ export function InputList<T = DefaultType>({
       item: newItemValue,
     });
   }
+
+  return {
+    handleMoveUp,
+    handleMoveDown,
+    handleRemoveItem,
+    handleAdd,
+    handleChangeItem,
+  };
 }
 
 function defaultItemBuilder(): DefaultType {
