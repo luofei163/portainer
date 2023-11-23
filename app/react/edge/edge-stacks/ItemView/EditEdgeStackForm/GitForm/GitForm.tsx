@@ -31,7 +31,7 @@ import { useCurrentUser } from '@/react/hooks/useUser';
 import { useCreateGitCredentialMutation } from '@/react/portainer/account/git-credentials/git-credentials.service';
 import { notifyError, notifySuccess } from '@/portainer/services/notifications';
 import { EnvironmentType } from '@/react/portainer/environments/types';
-import { Registry } from '@/react/portainer/registries/types';
+import { Registry } from '@/react/portainer/registries/types/registry';
 import { useRegistries } from '@/react/portainer/registries/queries/useRegistries';
 import { RelativePathFieldset } from '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
 import { parseRelativePathResponse } from '@/react/portainer/gitops/RelativePathFieldset/utils';
