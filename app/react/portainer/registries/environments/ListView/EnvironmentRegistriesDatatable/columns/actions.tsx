@@ -20,9 +20,11 @@ function Cell({
   row: { original: item },
 }: CellContext<DecoratedRegistry, unknown>) {
   const environmentId = useEnvironmentId();
-  const hasUpdateAccessAuthorizations = useAuthorizations([
-    'PortainerRegistryUpdateAccess',
-  ]);
+  const hasUpdateAccessAuthorizations = useAuthorizations(
+    ['PortainerRegistryUpdateAccess'],
+    environmentId,
+    true
+  );
   const canManageAccess =
     item.Type !== RegistryTypes.ANONYMOUS && hasUpdateAccessAuthorizations;
 
