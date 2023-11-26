@@ -25,8 +25,10 @@ import { ApplicationsStacksDatatable } from '@/react/kubernetes/applications/Lis
 import { NodesDatatable } from '@/react/kubernetes/cluster/HomeView/NodesDatatable';
 import { StackName } from '@/react/kubernetes/DeployView/StackName/StackName';
 
+import { registriesModule } from './registries';
+
 export const ngModule = angular
-  .module('portainer.kubernetes.react.components', [])
+  .module('portainer.kubernetes.react.components', [registriesModule])
   .component(
     'ingressClassDatatable',
     r2a(IngressClassDatatableAngular, [
