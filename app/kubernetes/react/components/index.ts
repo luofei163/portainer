@@ -24,6 +24,8 @@ import { YAMLInspector } from '@/react/kubernetes/components/YAMLInspector';
 import { ApplicationsStacksDatatable } from '@/react/kubernetes/applications/ListView/ApplicationsStacksDatatable';
 import { NodesDatatable } from '@/react/kubernetes/cluster/HomeView/NodesDatatable';
 import { StackName } from '@/react/kubernetes/DeployView/StackName/StackName';
+import { PersistedFoldersFormSection } from '@/react/kubernetes/applications/components/PersistedFoldersFormSection';
+import { persistedFoldersValidation } from '@/react/kubernetes/applications/components/PersistedFoldersFormSection/persistedFoldersValidation';
 
 export const ngModule = angular
   .module('portainer.kubernetes.react.components', [])
@@ -173,4 +175,18 @@ withFormValidation(
   'kubeServicesForm',
   ['values', 'onChange', 'appName', 'selector', 'isEditMode', 'namespace'],
   kubeServicesValidation
+);
+
+withFormValidation(
+  ngModule,
+  withUIRouter(withCurrentUser(withReactQuery(PersistedFoldersFormSection))),
+  'persistedFoldersFormSection',
+  [
+    'isEdit',
+    'applicationValues',
+    'isAddPersistentFolderButtonShown',
+    'initialValues',
+    'availableVolumes',
+  ],
+  persistedFoldersValidation
 );
