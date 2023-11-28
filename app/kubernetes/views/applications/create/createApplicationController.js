@@ -154,6 +154,7 @@ class KubernetesCreateApplicationController {
     this.supportGlobalDeployment = this.supportGlobalDeployment.bind(this);
     this.onChangePlacementType = this.onChangePlacementType.bind(this);
     this.onServicesChange = this.onServicesChange.bind(this);
+    this.onChangeResourceReservation = this.onChangeResourceReservation.bind(this);
   }
   /* #endregion */
 
@@ -619,6 +620,13 @@ class KubernetesCreateApplicationController {
     if (this.formValues.ReplicaCount === null) {
       this.formValues.ReplicaCount = 1;
     }
+  }
+
+  onChangeResourceReservation(values) {
+    return this.$async(async () => {
+      this.formValues.MemoryLimit = values.memoryLimit;
+      this.formValues.CpuLimit = values.cpuLimit;
+    });
   }
 
   resourceQuotaCapacityExceeded() {

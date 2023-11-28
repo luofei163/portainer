@@ -24,6 +24,10 @@ import { YAMLInspector } from '@/react/kubernetes/components/YAMLInspector';
 import { ApplicationsStacksDatatable } from '@/react/kubernetes/applications/ListView/ApplicationsStacksDatatable';
 import { NodesDatatable } from '@/react/kubernetes/cluster/HomeView/NodesDatatable';
 import { StackName } from '@/react/kubernetes/DeployView/StackName/StackName';
+import {
+  ResourceReservationFormSection,
+  resourceReservationValidation,
+} from '@/react/kubernetes/applications/components/ResourceReservationFormSection';
 
 export const ngModule = angular
   .module('portainer.kubernetes.react.components', [])
@@ -173,4 +177,17 @@ withFormValidation(
   'kubeServicesForm',
   ['values', 'onChange', 'appName', 'selector', 'isEditMode', 'namespace'],
   kubeServicesValidation
+);
+
+withFormValidation(
+  ngModule,
+  withUIRouter(withCurrentUser(withReactQuery(ResourceReservationFormSection))),
+  'resourceReservationFormSection',
+  [
+    'namespaceHasQuota',
+    'resourceQuotaCapacityExceeded',
+    'maxMemoryLimit',
+    'maxCpuLimit',
+  ],
+  resourceReservationValidation
 );
