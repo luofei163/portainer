@@ -154,6 +154,7 @@ class KubernetesCreateApplicationController {
     this.supportGlobalDeployment = this.supportGlobalDeployment.bind(this);
     this.onChangePlacementType = this.onChangePlacementType.bind(this);
     this.onServicesChange = this.onServicesChange.bind(this);
+    this.onAutoScaleChange = this.onAutoScaleChange.bind(this);
   }
   /* #endregion */
 
@@ -235,6 +236,22 @@ class KubernetesCreateApplicationController {
     if (this.formValues.DeploymentType === this.ApplicationDeploymentTypes.GLOBAL) {
       this.formValues.AutoScaler.IsUsed = false;
     }
+  }
+
+  onAutoScaleChange(values) {
+    return this.$async(async () => {
+      if (!this.formValues.AutoScaler.IsUsed && values.isUsed) {
+        this.formValues.AutoScaler.IsUsed = values.isUsed;
+        this.formValues.AutoScaler.MinReplicas = 1;
+        this.formValues.AutoScaler.MaxReplicas = 3;
+        this.formValues.AutoScaler.TargetCPUUtilization = 50;
+        return;
+      }
+      this.formValues.AutoScaler.IsUsed = values.isUsed;
+      this.formValues.AutoScaler.MinReplicas = values.minReplicas;
+      this.formValues.AutoScaler.MaxReplicas = values.maxReplicas;
+      this.formValues.AutoScaler.TargetCPUUtilization = values.targetCpuUtilizationPercentage;
+    });
   }
   /* #endregion */
 
