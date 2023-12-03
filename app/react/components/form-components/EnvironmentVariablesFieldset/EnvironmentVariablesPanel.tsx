@@ -1,10 +1,11 @@
+import { ComponentProps } from 'react';
+
 import { FormSection } from '@@/form-components/FormSection';
 import { TextTip } from '@@/Tip/TextTip';
 
-import { ArrayError } from '../InputList/InputList';
-
-import { Value } from './types';
 import { EnvironmentVariablesFieldset } from './EnvironmentVariablesFieldset';
+
+type FieldsetProps = ComponentProps<typeof EnvironmentVariablesFieldset>;
 
 export function EnvironmentVariablesPanel({
   explanation,
@@ -15,12 +16,9 @@ export function EnvironmentVariablesPanel({
   isFoldable = false,
 }: {
   explanation?: string;
-  values: Value;
-  onChange(value: Value): void;
   showHelpMessage?: boolean;
-  errors?: ArrayError<Value>;
   isFoldable?: boolean;
-}) {
+} & FieldsetProps) {
   return (
     <FormSection
       title="Environment variables"
