@@ -17,10 +17,10 @@ function Cell({
   getValue,
   row: { original: item },
 }: CellContext<DecoratedUser, 'string'>) {
-  const { isAdmin } = useCurrentUser();
+  const { isPureAdmin } = useCurrentUser();
   const name = getValue();
 
-  if (!isAdmin) {
+  if (!isPureAdmin) {
     return <>{name}</>;
   }
 
