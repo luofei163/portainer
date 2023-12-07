@@ -7,6 +7,7 @@ import {
   DefaultRegistryDomain,
   DefaultRegistryName,
 } from '@/react/portainer/registries/ListView/DefaultRegistry';
+import { GitlabProjectTable } from '@/react/portainer/registries/CreateView/GitlabProjectsTable/GitlabProjectsTable';
 
 export const registriesModule = angular
   .module('portainer.app.react.components.registries', [])
@@ -21,4 +22,8 @@ export const registriesModule = angular
   .component(
     'defaultRegistryDomain',
     r2a(withReactQuery(DefaultRegistryDomain), [])
+  )
+  .component(
+    'gitlabProjectSelector',
+    r2a(GitlabProjectTable, ['dataset', 'onChange', 'value'])
   ).name;
