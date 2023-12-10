@@ -11,6 +11,8 @@ import { KubeSettingsPanel } from '@/react/portainer/settings/SettingsView/KubeS
 import { HelmCertPanel } from '@/react/portainer/settings/SettingsView/HelmCertPanel';
 import { HiddenContainersPanel } from '@/react/portainer/settings/SettingsView/HiddenContainersPanel/HiddenContainersPanel';
 import { SSLSettingsPanelWrapper } from '@/react/portainer/settings/SettingsView/SSLSettingsPanel/SSLSettingsPanel';
+import { LDAPUsersTable } from '@/react/portainer/settings/AuthenticationView/LDAPAuth/LDAPUsersTable';
+import { LDAPGroupsTable } from '@/react/portainer/settings/AuthenticationView/LDAPAuth/LDAPGroupsTable';
 
 export const settingsModule = angular
   .module('portainer.app.react.components.settings', [])
@@ -39,4 +41,6 @@ export const settingsModule = angular
   .component(
     'kubeSettingsPanel',
     r2a(withUIRouter(withReactQuery(KubeSettingsPanel)), [])
-  ).name;
+  )
+  .component('ldapUsersDatatable', r2a(LDAPUsersTable, ['dataset']))
+  .component('ldapGroupsDatatable', r2a(LDAPGroupsTable, ['dataset'])).name;
