@@ -10,6 +10,7 @@ import { RefAttributes } from 'react';
 import ReactSelectType from 'react-select/dist/declarations/src/Select';
 
 import './ReactSelect.css';
+import { AutomationTestingProps } from '@/types';
 
 interface DefaultOption {
   value: string;
@@ -54,7 +55,7 @@ export function Select<
   isCreatable = false,
   size = 'md',
   ...props
-}: Props<Option, IsMulti, Group>) {
+}: Props<Option, IsMulti, Group> & AutomationTestingProps) {
   const Component = isCreatable ? ReactSelectCreatable : ReactSelect;
 
   return (

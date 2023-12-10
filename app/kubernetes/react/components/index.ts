@@ -18,6 +18,10 @@ import {
   ApplicationEventsDatatable,
 } from '@/react/kubernetes/applications/DetailsView';
 import { ApplicationContainersDatatable } from '@/react/kubernetes/applications/DetailsView/ApplicationContainersDatatable';
+import {
+  PlacementFormSection,
+  placementValidation,
+} from '@/react/kubernetes/applications/components/PlacementFormSection';
 import { withFormValidation } from '@/react-tools/withFormValidation';
 import { withCurrentUser } from '@/react-tools/withCurrentUser';
 import { YAMLInspector } from '@/react/kubernetes/components/YAMLInspector';
@@ -173,4 +177,12 @@ withFormValidation(
   'kubeServicesForm',
   ['values', 'onChange', 'appName', 'selector', 'isEditMode', 'namespace'],
   kubeServicesValidation
+);
+
+withFormValidation(
+  ngModule,
+  withUIRouter(withCurrentUser(withReactQuery(PlacementFormSection))),
+  'placementFormSection',
+  [],
+  placementValidation
 );
