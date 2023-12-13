@@ -3,7 +3,10 @@ import { parseArrayOfStrings } from '@@/form-components/EnvironmentVariablesFiel
 import { ContainerJSON } from '../../queries/container';
 
 export function getDefaultViewModel() {
-  return [];
+  return [
+    { name: 'LANG', value: 'C.UTF-8' },
+    { name: 'LC_ALL', value: 'C.UTF-8' },
+  ];
 }
 
 export function toViewModel(container: ContainerJSON) {
