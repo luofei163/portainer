@@ -5,11 +5,48 @@ import { Terminal } from 'xterm';
 
 import { baseHref } from '@/portainer/helpers/pathHelper';
 import { notifyError } from '@/portainer/services/notifications';
+import { BROWSER_OS_PLATFORM } from '@/react/constants';
 
 import { PageHeader } from '@@/PageHeader';
 import { Widget, WidgetBody } from '@@/Widget';
 import { Icon } from '@@/Icon';
 import { Button } from '@@/buttons';
+import { Tooltip } from '@@/Tip/Tooltip';
+
+const editorConfig = {
+  mac: {
+    tooltip: (
+      <>
+        <div>Within the console:</div>
+        <div>Cmd+C - Copy</div>
+        <div>Cmd+V - Paste</div>
+        <div>or right-click -&gt; Copy/Paste</div>
+      </>
+    ),
+  },
+
+  lin: {
+    tooltip: (
+      <>
+        <div>Within the console:</div>
+        <div>Ctrl+Insert - Copy</div>
+        <div>Shift+Insert - Paste</div>
+        <div>or right-click -&gt; Copy/Paste</div>
+      </>
+    ),
+  },
+
+  win: {
+    tooltip: (
+      <>
+        <div>Within the console:</div>
+        <div>Ctrl+Insert - Copy</div>
+        <div>Shift+Insert - Paste</div>
+        <div>or right-click -&gt; Copy/Paste</div>
+      </>
+    ),
+  },
+} as const;
 
 interface StringDictionary {
   [index: string]: string;
@@ -118,6 +155,9 @@ export function ConsoleView() {
                   className="col-sm-3 col-lg-2 control-label m-0 p-0 text-left"
                 >
                   Command
+                  <Tooltip
+                    message={editorConfig[BROWSER_OS_PLATFORM].tooltip}
+                  />
                 </label>
                 <div className="col-sm-8 input-group p-0">
                   <span className="input-group-addon">
